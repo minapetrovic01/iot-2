@@ -27,7 +27,8 @@ def on_message(client, userdata, msg):
         
         if pillow_data.heartRate < 70:
             alert_message = {"Alert": "Heart rate is less than 70"}
-            client.publish("sensor/test/alert", json.dumps(alert_message))
+            #client.publish("analysed/alert", json.dumps(alert_message))
+            client.publish("analysed/alert", msg.payload)
             print("Published alert message")
     except (json.JSONDecodeError, KeyError, TypeError) as e:
         print(f"Failed to deserialize message: {e}")
