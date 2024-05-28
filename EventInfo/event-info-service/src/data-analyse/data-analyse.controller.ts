@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Delete, Put, Body, Post, Query } from '@nestjs/common';
 import { DataAnalyseService } from './data-analyse.service';
 import { PillowAnalysed } from 'src/models/pillowanalise.model';
+import { PillowAnalysedID } from 'src/models/pillowanalisedid.model';
 
 @Controller('data-analyse')
 export class DataAnalyseController {
@@ -22,7 +23,7 @@ export class DataAnalyseController {
     }
   
     @Put(':id')
-    async updateOne(@Param('id') id: string, @Body() data: PillowAnalysed): Promise<void> {
+    async updateOne(@Param('id') id: string, @Body() data: PillowAnalysedID): Promise<void> {
       return this.dataAnalyseService.updateOne(id, data);
     }
   
