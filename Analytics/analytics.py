@@ -37,6 +37,7 @@ client = mqtt.Client(client_id="MqttClientApp", clean_session=True, userdata=Non
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("localhost", 1883, 60)
+#client.connect("localhost", 1883, 60)
+client.connect("mosquitto", 1883, 60)
 
 client.loop_forever()

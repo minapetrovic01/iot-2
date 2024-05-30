@@ -9,7 +9,8 @@ import { DataAnalyseController } from './data-analyse/data-analyse.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/pillowdb'),
+    //MongooseModule.forRoot('mongodb://localhost:27017/pillowdb'),
+    MongooseModule.forRoot('mongodb://pillowdb3:27017/pillowdb'),
     MongooseModule.forFeature([{ name: PillowAnalysed.name, schema: PillowAnalysedSchema }])
   ],
   controllers: [AppController, DataAnalyseController],

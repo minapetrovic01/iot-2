@@ -2,6 +2,8 @@ services:
   mosquitto:
     image: eclipse-mosquitto
     container_name: mosquitto
+    networks:
+      - BRIDGE
     volumes:
       - ./config:/mosquitto/config
       - ./data:/mosquitto/data
@@ -11,3 +13,42 @@ services:
       - 9001:9001
     stdin_open: true 
     tty: true
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: pillowdb3
+    networks:
+      - BRIDGE
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data1:/data/db
+  sensor:
+    image: sensor
+    container_name: sensor
+    networks:
+      - BRIDGE
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+  analytics:
+    image: analytics
+    container_name: analytics
+    networks:
+      - BRIDGE
+    depends_on:
+      - sensor
+  eventinfo:
+    image: eventinfo
+    container_name: eventinfo
+    networks:
+      - BRIDGE
+    ports:
+      - "3001:3001"
+    depends_on:
+      - analytics
+
+networks:
+  BRIDGE:
+    driver: bridge
+  
